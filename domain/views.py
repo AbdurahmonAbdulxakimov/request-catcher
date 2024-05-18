@@ -17,7 +17,7 @@ class RequestsCatcherView(generics.GenericAPIView):
 
         data = {"method": method, "headers": dict(headers), "path": path}
 
-        sendInfo(data)
+        sendInfo(domain, data)
         return Response({"message": "GET request"})
 
     # def post(self, request, *args, **kwargs):
