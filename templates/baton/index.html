@@ -1,0 +1,79 @@
+{% extends 'admin/index.html' %}
+{% load baton_tags %}
+
+{% block content %}
+  <div id="content-main">
+    {% load i18n %}
+    {% load static %}
+    <script src="{% static 'baton/js_snippets/init_analytics.js' %}"></script>
+    <!-- Include the ActiveUsers component script. -->
+    <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/active-users.js"></script>
+
+    <div class="container-fluid container-analytics">
+      {% block baton_before_analytics %}
+
+      {% endblock %}
+      {% comment %} <h4 class="d-flex justify-content-between">Google Analytics</h4> {% endcomment %}
+      <!-- this is just to make the view selector work, no need to display it -->
+      {% comment %} <div id="view-selector-container" style="display: none"></div> {% endcomment %}
+
+      {% comment %} <p>
+        <select id="analytics-timedelta" class="form-select">
+          <option value="15daysAgo">
+            {% trans 'last 15 days' %}
+          </option>
+          <option value="30daysAgo">
+            {% trans 'last month' %}
+          </option>
+          <option value="90daysAgo">
+            {% trans 'last three months' %}
+          </option>
+          <option value="365daysAgo">
+            {% trans 'last year' %}
+          </option>
+        </select>
+      </p> {% endcomment %}
+
+      <div class="row my-4">
+        <div class="col-lg-6">
+          <section class="panel">
+            <h1>{% trans 'Users' %}</h1>
+            <h4><b>All User</b> : {{ users.all_count }}</h4>
+            <h4><b>Month User</b> : {{ users.month_count }}</h4>
+            <h4><b>Day User</b> : {{ users.day_count }}</h4>
+            {% comment %} <div class="chart-container" id="chart-1-container"></div> {% endcomment %}
+          </section>
+        </div>
+        <div class="col-lg-6">
+          <section class="panel">
+            <h1>{% trans 'Orders' %}</h1>
+            <h4><b>All Order</b> : {{ orders.all_count }}</h4>
+            <h4><b>All Order Sum</b> : {{ orders.all_sum }}</h4>
+            <h4><b>Month Order</b> : {{ orders.month_count }}</h4>
+            <h4><b>Month Order Sum</b> : {{ orders.month_sum }}</h4>
+            <h4><b>Day Order</b> : {{ orders.day_count }}</h4>
+            <h4><b>Day Order Sum</b> : {{ orders.day_sum }}</h4>
+            {% comment %} <div class="chart-container" id="chart-1-container"></div> {% endcomment %}
+          </section>
+        </div>
+      </div>
+      <div class="row my-4">
+        <div class="col-lg-6">
+          <section class="panel">
+            <h1>{% trans 'Jamiyat' %}</h1>
+            <h4><b>All Questions</b> : {{ questions.all_count }}</h4>
+            <h4><b>All Answers</b> : {{ answers.all_count }}</h4>
+            <h4><b>Month Questions</b> : {{ questions.month_count }}</h4>
+            <h4><b>Month Answers</b> : {{ answers.month_count }}</h4>
+            <h4><b>Day Questions</b> : {{ questions.day_count }}</h4>
+            <h4><b>Day Answers</b> : {{ answers.day_count }}</h4>
+            {% comment %} <div class="chart-container" id="chart-1-container"></div> {% endcomment %}
+          </section>
+        </div>
+      </div>
+      {% block baton_after_analytics %}
+
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}
