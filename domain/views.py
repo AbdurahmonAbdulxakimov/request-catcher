@@ -1,50 +1,37 @@
-from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 
 from domain.serializers import RequestsCatcherSerializer
-from domain.utils import sendInfo
+from domain.utils import send_info
 
 
 class RequestsCatcherView(generics.GenericAPIView):
     serializer_class = RequestsCatcherSerializer
 
+    @send_info
     def get(self, request, *args, **kwargs):
-        domain = request.META.get("HTTP_HOST").split(".")[0]
-        method = request.method
-        headers = request.headers
-        path = kwargs.pop("path", "/")
-
-        data = {"method": method, "headers": dict(headers), "path": path}
-
-        sendInfo(domain, data)
         return Response({"message": "GET request"})
 
-    # def post(self, request, *args, **kwargs):
-    #     headers = request.headers
-    #     path = kwargs.pop("path", "/")
+    @send_info
+    def post(self, request, *args, **kwargs):
+        return Response({"message": "POST request"})
 
-    #     data = {"headers": dict(headers), "path": path, "data": dict(request.data)}
+    @send_info
+    def put(self, request, *args, **kwargs):
+        return Response({"message": "PUT request"})
 
-    #     sendInfo(data)
-    #     return Response({"message": "POST request"})
+    @send_info
+    def patch(self, request, *args, **kwargs):
+        return Response({"message": "PATCH request"})
 
-    # def put(self, request, *args, **kwargs):
-    #     print("PUT request")
-    #     return Response({"message": "PUT request"})
+    @send_info
+    def delete(self, request, *args, **kwargs):
+        return Response({"message": "DELETE request"})
 
-    # def patch(self, request, *args, **kwargs):
-    #     print("PATCH request")
-    #     return Response({"message": "PATCH request"})
+    @send_info
+    def head(self, request, *args, **kwargs):
+        return Response({"message": "HEAD request"})
 
-    # def delete(self, request, *args, **kwargs):
-    #     print("DELETE request")
-    #     return Response({"message": "DELETE request"})
-
-    # def head(self, request, *args, **kwargs):
-    #     print("HEAD request")
-    #     return Response({"message": "HEAD request"})
-
-    # def options(self, request, *args, **kwargs):
-    #     print("OPTIONS request")
-    #     return Response({"message": "OPTIONS request"})
+    @send_info
+    def options(self, request, *args, **kwargs):
+        return Response({"message": "OPTIONS request"})

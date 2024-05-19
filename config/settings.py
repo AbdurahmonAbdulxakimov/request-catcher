@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    "django_hosts.middleware.HostsRequestMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -59,7 +58,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
-    "django_hosts.middleware.HostsResponseMiddleware",
 ]
 # if DEBUG:
 #     MIDDLEWARE.append("querycount.middleware.QueryCountMiddleware")
@@ -182,10 +180,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ),
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         # 'rest_framework.renderers.BrowsableAPIRenderer',
@@ -193,10 +187,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
-    "DEFAULT_FILTER_BACKENDS": [
-        "rest_framework.filters.SearchFilter",
-    ],
-    "PAGE_SIZE": 10,
     "DATE_FORMAT": "%Y-%m-%d",
     "DATETIME_FORMAT": "%Y-%m-%d %H:%M:%S",
     "DATE_INPUT_FORMATS": ["%d-%m-%Y", "%Y-%m-%d"],
@@ -215,9 +205,6 @@ REST_FRAMEWORK = {
         # "auth-sms": "5/h",
         "dj_rest_auth": "10000/day",
     },
-    "USE_JWT": True,
-    "JWT_AUTH_COOKIE": "request_catcher-auth",
-    "JWT_AUTH_REFRESH_COOKIE": "my-refresh-token",
 }
 
 CORS_ALLOW_ALL_ORIGINS = (
